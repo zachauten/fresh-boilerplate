@@ -1,0 +1,25 @@
+name: Initialise Repo
+on: push
+
+permissions:
+  contents: write
+
+jobs:
+  run-script:
+    name: run script
+
+    # We will only run this action when this repository isn't the
+    # template repository
+    if: >-
+      ${{ !github.event.repository.is_template && github.run_number < 2 }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      # - name: Checkout
+      #   uses: actions/checkout@v3
+
+      - name: Print
+        run: echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+
+    # Run my script to setup domain, hosting, analytics
